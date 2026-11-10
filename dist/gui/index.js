@@ -1,11 +1,11 @@
 import { createComponent as i, insert as s, memo as y, template as g, effect as C, className as M, setAttribute as K } from "solid-js/web";
 import { Show as m, createSignal as w, createEffect as q, onCleanup as U, createMemo as $ } from "solid-js";
 import { usePlugin as f, Panel as W, Command as G, MenuItem as V } from "@opencode/plugin/gui";
-const j = 48, J = 48;
-function Q(e) {
-  return Math.max(j, e - J);
+const X = 48, j = 48;
+function J(e) {
+  return Math.max(X, e - j);
 }
-var X = /* @__PURE__ */ g('<div class="os-scroll-btn is-top">'), Y = /* @__PURE__ */ g('<div class="os-scroll-btn is-bottom">');
+var Q = /* @__PURE__ */ g('<div class="os-scroll-btn is-top">'), Y = /* @__PURE__ */ g('<div class="os-scroll-btn is-bottom">');
 const Z = 24, ee = 200, te = "input, textarea, select, [contenteditable='true'], [contenteditable=''], [role='textbox']";
 function xe(e) {
   const t = e.edge ?? Z, n = e.margin ?? ee;
@@ -41,7 +41,7 @@ function xe(e) {
     }), h() && e.loadMore(), _());
   }, P = (l) => l instanceof HTMLElement && l.closest(te) !== null, F = (l) => {
     if (l.defaultPrevented || l.altKey || l.ctrlKey || l.metaKey || P(l.target) || !r || r.scrollHeight <= r.clientHeight) return;
-    const d = Q(r.clientHeight);
+    const d = J(r.clientHeight);
     switch (l.key) {
       case "Home":
         l.preventDefault(), r.scrollTop = 0;
@@ -94,7 +94,7 @@ function pe(e) {
       return y(() => !!e.nav.scrollable())() && !e.nav.atTop();
     },
     get children() {
-      var n = X();
+      var n = Q();
       return s(n, i(t.ui.Tooltip, {
         get value() {
           return e.topLabel;
@@ -152,7 +152,7 @@ const re = `
 .os-scroll::-webkit-scrollbar { width: 10px; }
 .os-scroll::-webkit-scrollbar-thumb { background: var(--v2-border-border-strong); border-radius: 8px; border: 3px solid transparent; background-clip: padding-box; }
 .os-scroll:focus-visible { outline: 2px solid var(--v2-border-border-focus); outline-offset: -2px; }
-.os-scroll-btn { position: absolute; right: 8px; z-index: 10; display: flex; }
+.os-scroll-btn { position: absolute; left: 50%; transform: translateX(-50%); z-index: 10; display: flex; }
 .os-scroll-btn.is-top { top: 8px; }
 .os-scroll-btn.is-bottom { bottom: 8px; }
 .os-scroll-btn [data-component="icon-button-v2"] { box-shadow: var(--v2-elevation-raised); }
@@ -380,6 +380,6 @@ export {
   ge as intlTag,
   v as panelText,
   Me as registerSidePanel,
-  Q as scrollStep,
+  J as scrollStep,
   de as supportedLocale
 };
