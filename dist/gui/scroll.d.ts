@@ -49,6 +49,6 @@ export type ScrollNavProps = {
     topIcon?: IconName;
     bottomIcon?: IconName;
 };
-/** The floating "to top" / "to bottom" pair; render it inside the relative wrapper. */
+/** Two floating buttons at the top and bottom edges of the scroll area. */
 export declare function ScrollNav(props: ScrollNavProps): import("solid-js").JSX.Element;
-export declare const SCROLL_CSS = "\n.os-scroll { scrollbar-width: thin; scrollbar-color: var(--v2-border-border-strong) transparent; }\n.os-scroll::-webkit-scrollbar { width: 10px; }\n.os-scroll::-webkit-scrollbar-thumb { background: var(--v2-border-border-strong); border-radius: 8px; border: 3px solid transparent; background-clip: padding-box; }\n.os-scroll:focus-visible { outline: 2px solid var(--v2-border-border-focus); outline-offset: -2px; }\n.os-scroll-nav { position: absolute; right: 10px; bottom: 10px; z-index: 10; display: flex; flex-direction: column; gap: 6px; }\n.os-scroll-btn { box-shadow: var(--v2-elevation-raised); }\n.os-scroll-sentinel { height: 1px; flex: 0 0 auto; }\n";
+export declare const SCROLL_CSS = "\n.os-scroll { scrollbar-width: thin; scrollbar-color: var(--v2-border-border-strong) transparent; }\n.os-scroll::-webkit-scrollbar { width: 10px; }\n.os-scroll::-webkit-scrollbar-thumb { background: var(--v2-border-border-strong); border-radius: 8px; border: 3px solid transparent; background-clip: padding-box; }\n.os-scroll:focus-visible { outline: 2px solid var(--v2-border-border-focus); outline-offset: -2px; }\n.os-scroll-btn { position: absolute; right: 8px; z-index: 10; box-shadow: var(--v2-elevation-raised); }\n.os-scroll-btn.is-top { top: 8px; }\n.os-scroll-btn.is-bottom { bottom: 8px; }\n.os-scroll-sentinel { height: 1px; flex: 0 0 auto; }\n";

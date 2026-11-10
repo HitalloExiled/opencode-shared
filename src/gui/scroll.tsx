@@ -204,11 +204,11 @@ export type ScrollNavProps = {
   bottomIcon?: IconName;
 };
 
-/** The floating "to top" / "to bottom" pair; render it inside the relative wrapper. */
+/** Two floating buttons at the top and bottom edges of the scroll area. */
 export function ScrollNav(props: ScrollNavProps) {
   const ctx = usePlugin();
   return (
-    <div class="os-scroll-nav">
+    <>
       <Show when={props.nav.scrollable() && !props.nav.atTop()}>
         <ctx.ui.Tooltip value={props.topLabel} keys={["Home"]}>
           <ctx.ui.IconButton
@@ -216,7 +216,7 @@ export function ScrollNav(props: ScrollNavProps) {
             label={props.topLabel}
             variant="neutral"
             size="normal"
-            class="os-scroll-btn"
+            class="os-scroll-btn is-top"
             onClick={props.nav.toTop}
           />
         </ctx.ui.Tooltip>
@@ -228,12 +228,12 @@ export function ScrollNav(props: ScrollNavProps) {
             label={props.bottomLabel}
             variant="neutral"
             size="normal"
-            class="os-scroll-btn"
+            class="os-scroll-btn is-bottom"
             onClick={props.nav.toBottom}
           />
         </ctx.ui.Tooltip>
       </Show>
-    </div>
+    </>
   );
 }
 
@@ -242,7 +242,8 @@ export const SCROLL_CSS = `
 .os-scroll::-webkit-scrollbar { width: 10px; }
 .os-scroll::-webkit-scrollbar-thumb { background: var(--v2-border-border-strong); border-radius: 8px; border: 3px solid transparent; background-clip: padding-box; }
 .os-scroll:focus-visible { outline: 2px solid var(--v2-border-border-focus); outline-offset: -2px; }
-.os-scroll-nav { position: absolute; right: 10px; bottom: 10px; z-index: 10; display: flex; flex-direction: column; gap: 6px; }
-.os-scroll-btn { box-shadow: var(--v2-elevation-raised); }
+.os-scroll-btn { position: absolute; right: 8px; z-index: 10; box-shadow: var(--v2-elevation-raised); }
+.os-scroll-btn.is-top { top: 8px; }
+.os-scroll-btn.is-bottom { bottom: 8px; }
 .os-scroll-sentinel { height: 1px; flex: 0 0 auto; }
 `;
