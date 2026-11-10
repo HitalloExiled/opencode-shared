@@ -1,0 +1,42 @@
+{
+  "name": "@hitalloexiled/opencode-shared",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Shared SolidJS GUI kit for the OpenCode plugins (side panels, scroll navigation, states, i18n, panel registration).",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HitalloExiled/opencode-shared.git"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "AGENTS.md"
+  ],
+  "exports": {
+    "./gui": {
+      "types": "./dist/gui/index.d.ts",
+      "import": "./dist/gui/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "vite build && tsc -p tsconfig.build.json",
+    "dev": "vite build --watch",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "bun test test"
+  },
+  "peerDependencies": {
+    "@opencode/plugin": "^2.2.0",
+    "solid-js": "^1.9.0"
+  },
+  "devDependencies": {
+    "@opencode/plugin": "2.2.0",
+    "@types/bun": "1.3.3",
+    "@types/node": "24.12.2",
+    "solid-js": "1.9.18",
+    "typescript": "5.8.2",
+    "vite": "5.4.17",
+    "vite-plugin-solid": "2.11.15"
+  }
+}
