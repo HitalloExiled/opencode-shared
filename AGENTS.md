@@ -30,7 +30,7 @@ npm run build
 ## Consuming repos
 
 `opencode-memory`, `opencode-notes`, `opencode-plans` and `opencode-stats`
-depend on `@hitalloexiled/opencode-shared` pinned by commit. The parent
+depend on `opencode-shared` pinned by commit. The parent
 `opencode-tools` vendors this repo as the `shared/` submodule and its
 `setup.sh` runs `npm link` so the plugins use the working tree.
 

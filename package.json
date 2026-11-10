@@ -1,5 +1,5 @@
 {
-  "name": "@hitalloexiled/opencode-shared",
+  "name": "opencode-shared",
   "version": "0.1.0",
   "type": "module",
   "description": "Shared SolidJS GUI kit for the OpenCode plugins (side panels, scroll navigation, states, i18n, panel registration).",

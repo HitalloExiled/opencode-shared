@@ -1,5 +1,5 @@
 /**
- * `@hitalloexiled/opencode-shared/gui`
+ * `opencode-shared/gui`
  *
  * The shared GUI kit for the OpenCode plugin side panels. Render
  * `SHARED_CSS` once, then use the states, the status chip, the scroll

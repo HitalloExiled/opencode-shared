@@ -3,7 +3,7 @@
 Shared SolidJS GUI kit for the OpenCode plugin side panels
 (`opencode-memory`, `opencode-notes`, `opencode-plans`, `opencode-stats`).
 
-Package: `@hitalloexiled/opencode-shared`, entry `@hitalloexiled/opencode-shared/gui`.
+Package: `opencode-shared`, entry `opencode-shared/gui`.
 
 ## What lives here
 
@@ -41,7 +41,7 @@ an install must not need a build toolchain.
 
 ```json
 "dependencies": {
-  "@hitalloexiled/opencode-shared": "github:HitalloExiled/opencode-shared#<sha>"
+  "opencode-shared": "github:HitalloExiled/opencode-shared#<sha>"
 }
 ```
 
@@ -51,7 +51,7 @@ Local development (opencode-tools `setup.sh` does this):
 # in this repo
 npm link
 # in each plugin
-npm link @hitalloexiled/opencode-shared
+npm link opencode-shared
 ```
 
 Then edit `src/`, run `npm run build` (or `npm run dev`), and rebuild the
