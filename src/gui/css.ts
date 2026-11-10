@@ -5,7 +5,8 @@
  */
 
 import { SCROLL_CSS } from "./scroll";
+import { LIST_CSS } from "./list";
 import { STATES_CSS } from "./states";
 import { CHIP_CSS } from "./chip";
 
-export const SHARED_CSS = `${SCROLL_CSS}${STATES_CSS}${CHIP_CSS}`;
+export const SHARED_CSS = `${SCROLL_CSS}${LIST_CSS}${STATES_CSS}${CHIP_CSS}`;

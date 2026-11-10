@@ -1,5 +1,5 @@
-import { createComponent as s, insert as c, memo as T, template as b, effect as C, className as E, setAttribute as W } from "solid-js/web";
-import { Show as v, createSignal as k, createEffect as G, onCleanup as V, createMemo as _ } from "solid-js";
+import { createComponent as s, insert as c, memo as T, template as b, effect as C, className as L, setAttribute as W } from "solid-js/web";
+import { Show as v, createSignal as k, createEffect as G, onCleanup as V, createMemo as S } from "solid-js";
 import { usePlugin as x, Panel as X, Command as j, MenuItem as J } from "@opencode/plugin/gui";
 const Q = 48, Y = 48;
 function Z(e) {
@@ -7,16 +7,16 @@ function Z(e) {
 }
 var ee = /* @__PURE__ */ b('<div class="os-scroll-btn is-top">'), te = /* @__PURE__ */ b('<div class="os-scroll-btn is-bottom">');
 const re = 24, ne = 200, le = "input, textarea, select, [contenteditable='true'], [contenteditable=''], [role='textbox']";
-function ye(e) {
+function $e(e) {
   const t = e.edge ?? re, n = e.margin ?? ne;
   let r, a, o, i, u, g = 0, f = 0;
-  const [w, L] = k(!1), [M, I] = k(!0), [H, B] = k(!1), R = () => {
+  const [w, E] = k(!1), [M, I] = k(!0), [H, B] = k(!1), R = () => {
     var l;
     return (((l = e.visible) == null ? void 0 : l.call(e)) ?? !0) && document.visibilityState === "visible";
   }, p = () => e.hasMore() && !e.loadingMore() && R(), y = () => {
     if (!r) return;
     const l = r.scrollHeight - r.clientHeight;
-    L(l > 1), I(r.scrollTop <= t), B(r.scrollTop >= l - t);
+    E(l > 1), I(r.scrollTop <= t), B(r.scrollTop >= l - t);
   }, $ = () => {
     g || (g = requestAnimationFrame(() => {
       g = 0, y();
@@ -30,12 +30,12 @@ function ye(e) {
   }, m = (l) => r == null ? void 0 : r.scrollTo({
     top: l,
     behavior: "smooth"
-  }), S = () => r == null ? void 0 : r.focus({
+  }), _ = () => r == null ? void 0 : r.focus({
     preventScroll: !0
   }), D = () => {
-    m(0), S();
+    m(0), _();
   }, P = () => {
-    r && (m(r.scrollHeight), p() && e.loadMore(), S());
+    r && (m(r.scrollHeight), p() && e.loadMore(), _());
   }, F = (l) => l instanceof HTMLElement && l.closest(le) !== null, z = (l) => {
     if (l.defaultPrevented || l.altKey || l.ctrlKey || l.metaKey || F(l.target) || !r || r.scrollHeight <= r.clientHeight) return;
     const d = Z(r.clientHeight);
@@ -88,7 +88,7 @@ function ye(e) {
     onKeyDown: z
   };
 }
-function $e(e) {
+function ke(e) {
   const t = x();
   return [s(v, {
     get when() {
@@ -160,7 +160,7 @@ const oe = `
 .os-scroll-sentinel { height: 1px; flex: 0 0 auto; }
 `;
 var ae = /* @__PURE__ */ b("<div class=os-empty><div class=os-empty-title>"), ie = /* @__PURE__ */ b("<div class=os-empty-hint>"), se = /* @__PURE__ */ b("<div class=os-error role=alert><span class=os-error-text>"), ce = /* @__PURE__ */ b("<div><span>"), ue = /* @__PURE__ */ b("<div class=os-end>");
-function ke(e) {
+function Te(e) {
   const t = x();
   return (() => {
     var n = ae(), r = n.firstChild;
@@ -186,7 +186,7 @@ function ke(e) {
     }), null), n;
   })();
 }
-function Te(e) {
+function Se(e) {
   const t = x();
   return (() => {
     var n = se(), r = n.firstChild;
@@ -216,10 +216,10 @@ function _e(e) {
     var n = ce(), r = n.firstChild;
     return c(n, s(t.ui.Loader, {
       size: "small"
-    }), r), c(r, () => e.label), C(() => E(n, e.class ? `os-loading ${e.class}` : "os-loading")), n;
+    }), r), c(r, () => e.label), C(() => L(n, e.class ? `os-loading ${e.class}` : "os-loading")), n;
   })();
 }
-function Se(e) {
+function Ce(e) {
   return (() => {
     var t = ue();
     return c(t, () => e.label), t;
@@ -236,7 +236,7 @@ const de = `
 .os-end { color: var(--v2-text-text-faint); font-size: 10px; text-align: center; padding: 4px 0 8px; }
 `;
 var ge = /* @__PURE__ */ b("<span>");
-function Ce(e) {
+function Le(e) {
   const t = () => {
     const n = e.tone ?? "neutral";
     return `os-chip${n === "neutral" ? "" : ` is-${n}`}${e.class ? ` ${e.class}` : ""}`;
@@ -245,7 +245,7 @@ function Ce(e) {
     var n = ge();
     return c(n, () => e.label), C((r) => {
       var a = t(), o = e.title;
-      return a !== r.e && E(n, r.e = a), o !== r.t && W(n, "title", r.t = o), r;
+      return a !== r.e && L(n, r.e = a), o !== r.t && W(n, "title", r.t = o), r;
     }, {
       e: void 0,
       t: void 0
@@ -271,11 +271,11 @@ function fe(e, t) {
 function Ee(e, t) {
   const n = { "en-us": e, "pt-br": t }, r = () => {
     const i = x();
-    return _(() => me(i.locale.locale()));
+    return S(() => me(i.locale.locale()));
   };
   return { useLocale: r, useI18nTag: () => {
     const i = r();
-    return _(() => ve(i()));
+    return S(() => ve(i()));
   }, useT: () => {
     const i = r();
     return (u, ...g) => {
@@ -284,24 +284,24 @@ function Ee(e, t) {
     };
   }, tables: n };
 }
-function Le(e, t, n) {
+function Me(e, t, n) {
   return new Intl.NumberFormat(t, n).format(e);
 }
-function Me(e, t, n) {
+function Ie(e, t, n) {
   return new Intl.DateTimeFormat(t, n).format(e);
 }
 function h(e, t) {
   return (e.locale.locale() ?? "").toLowerCase().startsWith("pt") ? t.pt : t.en;
 }
 function he(e, t) {
-  return _(() => ({
+  return S(() => ({
     id: t.id,
     title: h(e, t.title),
     closable: t.closable ?? "compact",
     fallback: t.fallback ?? !1
   }));
 }
-function Ie(e, t) {
+function He(e, t) {
   const n = he(e, {
     id: t.id,
     title: t.title,
@@ -360,27 +360,29 @@ function Ie(e, t) {
     open: r
   };
 }
-const He = `${oe}${de}${be}`;
+const xe = `
+.os-list { display: flex; flex-direction: column; gap: 10px; }
+`, Be = `${oe}${xe}${de}${be}`;
 export {
   be as CHIP_CSS,
-  ke as EmptyState,
-  Se as EndMarker,
-  Te as ErrorBanner,
+  Te as EmptyState,
+  Ce as EndMarker,
+  Se as ErrorBanner,
   _e as LoadingRow,
   oe as SCROLL_CSS,
-  He as SHARED_CSS,
+  Be as SHARED_CSS,
   de as STATES_CSS,
-  $e as ScrollNav,
-  Ce as StatusChip,
+  ke as ScrollNav,
+  Le as StatusChip,
   Ee as createI18n,
   he as createPanelTab,
-  ye as createScrollNav,
-  Me as formatDate,
-  Le as formatNumber,
+  $e as createScrollNav,
+  Ie as formatDate,
+  Me as formatNumber,
   fe as interpolate,
   ve as intlTag,
   h as panelText,
-  Ie as registerSidePanel,
+  He as registerSidePanel,
   Z as scrollStep,
   me as supportedLocale
 };
