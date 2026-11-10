@@ -1,107 +1,108 @@
-import { createComponent as i, insert as s, memo as y, template as g, effect as C, className as M, setAttribute as K } from "solid-js/web";
-import { Show as m, createSignal as w, createEffect as q, onCleanup as U, createMemo as $ } from "solid-js";
-import { usePlugin as f, Panel as W, Command as G, MenuItem as V } from "@opencode/plugin/gui";
-const X = 48, j = 48;
-function J(e) {
-  return Math.max(X, e - j);
+import { createComponent as s, insert as c, memo as T, template as b, effect as C, className as E, setAttribute as W } from "solid-js/web";
+import { Show as v, createSignal as k, createEffect as G, onCleanup as V, createMemo as _ } from "solid-js";
+import { usePlugin as x, Panel as X, Command as j, MenuItem as J } from "@opencode/plugin/gui";
+const Q = 48, Y = 48;
+function Z(e) {
+  return Math.max(Q, e - Y);
 }
-var Q = /* @__PURE__ */ g('<div class="os-scroll-btn is-top">'), Y = /* @__PURE__ */ g('<div class="os-scroll-btn is-bottom">');
-const Z = 24, ee = 200, te = "input, textarea, select, [contenteditable='true'], [contenteditable=''], [role='textbox']";
-function xe(e) {
-  const t = e.edge ?? Z, n = e.margin ?? ee;
-  let r, a, o, c, b = 0, u = 0;
-  const [T, x] = w(!1), [E, L] = w(!0), [I, H] = w(!1), B = () => {
+var ee = /* @__PURE__ */ b('<div class="os-scroll-btn is-top">'), te = /* @__PURE__ */ b('<div class="os-scroll-btn is-bottom">');
+const re = 24, ne = 200, le = "input, textarea, select, [contenteditable='true'], [contenteditable=''], [role='textbox']";
+function ye(e) {
+  const t = e.edge ?? re, n = e.margin ?? ne;
+  let r, a, o, i, u, g = 0, f = 0;
+  const [w, L] = k(!1), [M, I] = k(!0), [H, B] = k(!1), R = () => {
     var l;
     return (((l = e.visible) == null ? void 0 : l.call(e)) ?? !0) && document.visibilityState === "visible";
-  }, h = () => e.hasMore() && !e.loadingMore() && B(), p = () => {
+  }, p = () => e.hasMore() && !e.loadingMore() && R(), y = () => {
     if (!r) return;
     const l = r.scrollHeight - r.clientHeight;
-    x(l > 1), L(r.scrollTop <= t), H(r.scrollTop >= l - t);
-  }, k = () => {
-    b || (b = requestAnimationFrame(() => {
-      b = 0, p();
+    L(l > 1), I(r.scrollTop <= t), B(r.scrollTop >= l - t);
+  }, $ = () => {
+    g || (g = requestAnimationFrame(() => {
+      g = 0, y();
     }));
-  }, R = () => {
-    u || (u = requestAnimationFrame(() => {
-      if (u = 0, !r || !a || !h()) return;
+  }, A = () => {
+    f || (f = requestAnimationFrame(() => {
+      if (f = 0, !r || !a || !p()) return;
       const l = r.getBoundingClientRect();
       a.getBoundingClientRect().top <= l.bottom + n && e.loadMore();
     }));
-  }, S = () => matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", _ = () => r == null ? void 0 : r.focus({
+  }, m = (l) => r == null ? void 0 : r.scrollTo({
+    top: l,
+    behavior: "smooth"
+  }), S = () => r == null ? void 0 : r.focus({
     preventScroll: !0
-  }), A = () => {
-    r == null || r.scrollTo({
-      top: 0,
-      behavior: S()
-    }), _();
-  }, D = () => {
-    r && (r.scrollTo({
-      top: r.scrollHeight,
-      behavior: S()
-    }), h() && e.loadMore(), _());
-  }, P = (l) => l instanceof HTMLElement && l.closest(te) !== null, F = (l) => {
-    if (l.defaultPrevented || l.altKey || l.ctrlKey || l.metaKey || P(l.target) || !r || r.scrollHeight <= r.clientHeight) return;
-    const d = J(r.clientHeight);
+  }), D = () => {
+    m(0), S();
+  }, P = () => {
+    r && (m(r.scrollHeight), p() && e.loadMore(), S());
+  }, F = (l) => l instanceof HTMLElement && l.closest(le) !== null, z = (l) => {
+    if (l.defaultPrevented || l.altKey || l.ctrlKey || l.metaKey || F(l.target) || !r || r.scrollHeight <= r.clientHeight) return;
+    const d = Z(r.clientHeight);
     switch (l.key) {
       case "Home":
-        l.preventDefault(), r.scrollTop = 0;
+        l.preventDefault(), m(0);
         break;
       case "End":
-        l.preventDefault(), r.scrollTop = r.scrollHeight, h() && e.loadMore();
+        l.preventDefault(), m(r.scrollHeight), p() && e.loadMore();
         break;
       case "PageUp":
-        l.preventDefault(), r.scrollTop = Math.max(0, r.scrollTop - d);
+        l.preventDefault(), m(Math.max(0, r.scrollTop - d));
         break;
       case "PageDown":
-        l.preventDefault(), r.scrollTop = Math.min(r.scrollHeight, r.scrollTop + d);
+        l.preventDefault(), m(Math.min(r.scrollHeight, r.scrollTop + d));
         break;
       default:
         return;
     }
-  }, z = () => {
-    r && (c == null || c.disconnect(), c = new ResizeObserver(k), c.observe(r), o == null || o.disconnect(), o = new IntersectionObserver((l) => {
-      l.some((d) => d.isIntersecting) && h() && e.loadMore();
+  }, N = () => {
+    if (u == null || u(), u = void 0, !r) return;
+    const l = r, d = () => $();
+    l.addEventListener("scroll", d, {
+      passive: !0
+    }), u = () => l.removeEventListener("scroll", d), i == null || i.disconnect(), i = new ResizeObserver($), i.observe(r), o == null || o.disconnect(), o = new IntersectionObserver((q) => {
+      q.some((U) => U.isIntersecting) && p() && e.loadMore();
     }, {
       root: r,
       rootMargin: `${n}px 0px`
-    }), a && o.observe(a), p());
-  }, N = (l) => {
-    r = l, z();
+    }), a && o.observe(a), y();
   }, O = (l) => {
+    r = l, N();
+  }, K = (l) => {
     a = l, o && o.observe(l);
   };
-  return q(() => {
+  return G(() => {
     var l, d;
-    e.hasMore(), e.loadingMore(), (l = e.visible) == null || l.call(e), (d = e.items) == null || d.call(e), k(), R();
-  }), U(() => {
-    c == null || c.disconnect(), o == null || o.disconnect(), cancelAnimationFrame(b), cancelAnimationFrame(u);
+    e.hasMore(), e.loadingMore(), (l = e.visible) == null || l.call(e), (d = e.items) == null || d.call(e), $(), A();
+  }), V(() => {
+    u == null || u(), i == null || i.disconnect(), o == null || o.disconnect(), cancelAnimationFrame(g), cancelAnimationFrame(f);
   }), {
-    ref: N,
-    sentinelRef: O,
-    scrollable: T,
-    atTop: E,
-    atBottom: I,
-    measure: p,
-    toTop: A,
-    toBottom: D,
-    onKeyDown: F
+    ref: O,
+    sentinelRef: K,
+    scrollable: w,
+    atTop: M,
+    atBottom: H,
+    measure: y,
+    toTop: D,
+    toBottom: P,
+    onKeyDown: z
   };
 }
-function pe(e) {
-  const t = f();
-  return [i(m, {
+function $e(e) {
+  const t = x();
+  return [s(v, {
     get when() {
-      return y(() => !!e.nav.scrollable())() && !e.nav.atTop();
+      return T(() => !!e.nav.scrollable())() && !e.nav.atTop();
     },
     get children() {
-      var n = Q();
-      return s(n, i(t.ui.Tooltip, {
+      var n = ee();
+      return c(n, s(t.ui.Tooltip, {
         get value() {
           return e.topLabel;
         },
         keys: ["Home"],
         get children() {
-          return i(t.ui.IconButton, {
+          return s(t.ui.IconButton, {
             get icon() {
               return e.topIcon ?? "arrow-up";
             },
@@ -117,19 +118,19 @@ function pe(e) {
         }
       })), n;
     }
-  }), i(m, {
+  }), s(v, {
     get when() {
-      return y(() => !!e.nav.scrollable())() && !e.nav.atBottom();
+      return T(() => !!e.nav.scrollable())() && !e.nav.atBottom();
     },
     get children() {
-      var n = Y();
-      return s(n, i(t.ui.Tooltip, {
+      var n = te();
+      return c(n, s(t.ui.Tooltip, {
         get value() {
           return e.bottomLabel;
         },
         keys: ["End"],
         get children() {
-          return i(t.ui.IconButton, {
+          return s(t.ui.IconButton, {
             get icon() {
               return e.bottomIcon ?? "arrow-down-to-line";
             },
@@ -147,8 +148,8 @@ function pe(e) {
     }
   })];
 }
-const re = `
-.os-scroll { scrollbar-width: thin; scrollbar-color: var(--v2-border-border-strong) transparent; }
+const oe = `
+.os-scroll { scrollbar-width: thin; scrollbar-color: var(--v2-border-border-strong) transparent; scroll-behavior: smooth; }
 .os-scroll::-webkit-scrollbar { width: 10px; }
 .os-scroll::-webkit-scrollbar-thumb { background: var(--v2-border-border-strong); border-radius: 8px; border: 3px solid transparent; background-clip: padding-box; }
 .os-scroll:focus-visible { outline: 2px solid var(--v2-border-border-focus); outline-offset: -2px; }
@@ -158,43 +159,43 @@ const re = `
 .os-scroll-btn [data-component="icon-button-v2"] { box-shadow: var(--v2-elevation-raised); }
 .os-scroll-sentinel { height: 1px; flex: 0 0 auto; }
 `;
-var ne = /* @__PURE__ */ g("<div class=os-empty><div class=os-empty-title>"), le = /* @__PURE__ */ g("<div class=os-empty-hint>"), oe = /* @__PURE__ */ g("<div class=os-error role=alert><span class=os-error-text>"), ae = /* @__PURE__ */ g("<div><span>"), ce = /* @__PURE__ */ g("<div class=os-end>");
-function we(e) {
-  const t = f();
+var ae = /* @__PURE__ */ b("<div class=os-empty><div class=os-empty-title>"), ie = /* @__PURE__ */ b("<div class=os-empty-hint>"), se = /* @__PURE__ */ b("<div class=os-error role=alert><span class=os-error-text>"), ce = /* @__PURE__ */ b("<div><span>"), ue = /* @__PURE__ */ b("<div class=os-end>");
+function ke(e) {
+  const t = x();
   return (() => {
-    var n = ne(), r = n.firstChild;
-    return s(n, i(m, {
+    var n = ae(), r = n.firstChild;
+    return c(n, s(v, {
       get when() {
         return e.icon;
       },
-      children: (a) => i(t.ui.Icon, {
+      children: (a) => s(t.ui.Icon, {
         get name() {
           return a();
         },
         size: "large",
         class: "os-empty-icon"
       })
-    }), r), s(r, () => e.title), s(n, i(m, {
+    }), r), c(r, () => e.title), c(n, s(v, {
       get when() {
         return e.hint;
       },
       children: (a) => (() => {
-        var o = le();
-        return s(o, a), o;
+        var o = ie();
+        return c(o, a), o;
       })()
     }), null), n;
   })();
 }
-function ye(e) {
-  const t = f();
+function Te(e) {
+  const t = x();
   return (() => {
-    var n = oe(), r = n.firstChild;
-    return s(r, () => e.message), s(n, i(m, {
+    var n = se(), r = n.firstChild;
+    return c(r, () => e.message), c(n, s(v, {
       get when() {
-        return y(() => !!e.retryLabel)() && e.onRetry;
+        return T(() => !!e.retryLabel)() && e.onRetry;
       },
       get children() {
-        return i(t.ui.Button, {
+        return s(t.ui.Button, {
           size: "small",
           variant: "ghost",
           onClick: () => {
@@ -209,22 +210,22 @@ function ye(e) {
     }), null), n;
   })();
 }
-function $e(e) {
-  const t = f();
+function _e(e) {
+  const t = x();
   return (() => {
-    var n = ae(), r = n.firstChild;
-    return s(n, i(t.ui.Loader, {
+    var n = ce(), r = n.firstChild;
+    return c(n, s(t.ui.Loader, {
       size: "small"
-    }), r), s(r, () => e.label), C(() => M(n, e.class ? `os-loading ${e.class}` : "os-loading")), n;
+    }), r), c(r, () => e.label), C(() => E(n, e.class ? `os-loading ${e.class}` : "os-loading")), n;
   })();
 }
-function Te(e) {
+function Se(e) {
   return (() => {
-    var t = ce();
-    return s(t, () => e.label), t;
+    var t = ue();
+    return c(t, () => e.label), t;
   })();
 }
-const ie = `
+const de = `
 .os-empty { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px; padding: 24px 10px; color: var(--v2-text-text-muted); }
 .os-empty-icon { color: var(--v2-text-text-faint); }
 .os-empty-title { font-weight: 600; color: var(--v2-text-text-base); }
@@ -234,74 +235,74 @@ const ie = `
 .os-loading { display: flex; align-items: center; gap: 8px; padding: 8px 2px; color: var(--v2-text-text-muted); }
 .os-end { color: var(--v2-text-text-faint); font-size: 10px; text-align: center; padding: 4px 0 8px; }
 `;
-var se = /* @__PURE__ */ g("<span>");
-function ke(e) {
+var ge = /* @__PURE__ */ b("<span>");
+function Ce(e) {
   const t = () => {
     const n = e.tone ?? "neutral";
     return `os-chip${n === "neutral" ? "" : ` is-${n}`}${e.class ? ` ${e.class}` : ""}`;
   };
   return (() => {
-    var n = se();
-    return s(n, () => e.label), C((r) => {
+    var n = ge();
+    return c(n, () => e.label), C((r) => {
       var a = t(), o = e.title;
-      return a !== r.e && M(n, r.e = a), o !== r.t && K(n, "title", r.t = o), r;
+      return a !== r.e && E(n, r.e = a), o !== r.t && W(n, "title", r.t = o), r;
     }, {
       e: void 0,
       t: void 0
     }), n;
   })();
 }
-const ue = `
+const be = `
 .os-chip { display: inline-flex; align-items: center; gap: 4px; padding: 1px 6px; border-radius: 999px; font-size: 10.5px; font-weight: 600; line-height: 1.6; white-space: nowrap; background: var(--v2-overlay-simple-overlay-pressed); color: var(--v2-text-text-muted); border: 1px solid transparent; }
 .os-chip.is-info { background: var(--v2-state-bg-info); color: var(--v2-state-fg-info); border-color: var(--v2-state-border-info); }
 .os-chip.is-success { background: var(--v2-state-bg-success); color: var(--v2-state-fg-success); border-color: var(--v2-state-border-success); }
 .os-chip.is-warning { background: var(--v2-state-bg-warning); color: var(--v2-state-fg-warning); border-color: var(--v2-state-border-warning); }
 .os-chip.is-danger { background: var(--v2-state-bg-danger); color: var(--v2-state-fg-danger); border-color: var(--v2-state-border-danger); }
 `;
-function de(e) {
+function me(e) {
   return (e ?? "").trim().toLowerCase().replace(/[-_]/g, "").startsWith("pt") ? "pt-br" : "en-us";
 }
-function ge(e) {
+function ve(e) {
   return e === "pt-br" ? "pt-BR" : "en-US";
 }
-function be(e, t) {
+function fe(e, t) {
   return e.replace(/\{(\d+)\}/g, (n, r) => String(t[Number(r)] ?? ""));
 }
-function Se(e, t) {
+function Ee(e, t) {
   const n = { "en-us": e, "pt-br": t }, r = () => {
-    const c = f();
-    return $(() => de(c.locale.locale()));
+    const i = x();
+    return _(() => me(i.locale.locale()));
   };
   return { useLocale: r, useI18nTag: () => {
-    const c = r();
-    return $(() => ge(c()));
+    const i = r();
+    return _(() => ve(i()));
   }, useT: () => {
-    const c = r();
-    return (b, ...u) => {
-      const x = n[c()][b] ?? (typeof u[0] == "string" ? u[0] : b);
-      return be(x, u);
+    const i = r();
+    return (u, ...g) => {
+      const w = n[i()][u] ?? (typeof g[0] == "string" ? g[0] : u);
+      return fe(w, g);
     };
   }, tables: n };
 }
-function _e(e, t, n) {
+function Le(e, t, n) {
   return new Intl.NumberFormat(t, n).format(e);
 }
-function Ce(e, t, n) {
+function Me(e, t, n) {
   return new Intl.DateTimeFormat(t, n).format(e);
 }
-function v(e, t) {
+function h(e, t) {
   return (e.locale.locale() ?? "").toLowerCase().startsWith("pt") ? t.pt : t.en;
 }
-function me(e, t) {
-  return $(() => ({
+function he(e, t) {
+  return _(() => ({
     id: t.id,
-    title: v(e, t.title),
+    title: h(e, t.title),
     closable: t.closable ?? "compact",
     fallback: t.fallback ?? !1
   }));
 }
-function Me(e, t) {
-  const n = me(e, {
+function Ie(e, t) {
+  const n = he(e, {
     id: t.id,
     title: t.title,
     closable: t.closable,
@@ -314,7 +315,7 @@ function Me(e, t) {
     region: "side",
     mobile: {
       get title() {
-        return v(e, t.title);
+        return h(e, t.title);
       },
       order: t.mobileOrder ?? 50,
       kind: "menu",
@@ -322,35 +323,35 @@ function Me(e, t) {
     },
     closed: () => ({}),
     list: (o) => o.open.includes(t.id) ? [n()] : [],
-    render: (o) => i(m, {
+    render: (o) => s(v, {
       get when() {
         return o.session.key;
       },
       keyed: !0,
-      children: (c) => t.view({
+      children: (i) => t.view({
         session: o.session
       })
     })
   };
-  return e.add(W, () => a), e.add(G, () => ({
+  return e.add(X, () => a), e.add(j, () => ({
     id: `open-${t.id}`,
     get title() {
-      return v(e, t.command.title);
+      return h(e, t.command.title);
     },
     get description() {
-      return t.command.description ? v(e, t.command.description) : void 0;
+      return t.command.description ? h(e, t.command.description) : void 0;
     },
     ...t.bind ? {
       bind: t.bind
     } : {},
     group: "general",
     run: r
-  })), e.add(V, () => ({
+  })), e.add(J, () => ({
     menu: "session.panel",
     id: t.id,
     order: t.order,
     get title() {
-      return v(e, t.title);
+      return h(e, t.title);
     },
     icon: t.icon,
     run: r
@@ -359,27 +360,27 @@ function Me(e, t) {
     open: r
   };
 }
-const Ee = `${re}${ie}${ue}`;
+const He = `${oe}${de}${be}`;
 export {
-  ue as CHIP_CSS,
-  we as EmptyState,
-  Te as EndMarker,
-  ye as ErrorBanner,
-  $e as LoadingRow,
-  re as SCROLL_CSS,
-  Ee as SHARED_CSS,
-  ie as STATES_CSS,
-  pe as ScrollNav,
-  ke as StatusChip,
-  Se as createI18n,
-  me as createPanelTab,
-  xe as createScrollNav,
-  Ce as formatDate,
-  _e as formatNumber,
-  be as interpolate,
-  ge as intlTag,
-  v as panelText,
-  Me as registerSidePanel,
-  J as scrollStep,
-  de as supportedLocale
+  be as CHIP_CSS,
+  ke as EmptyState,
+  Se as EndMarker,
+  Te as ErrorBanner,
+  _e as LoadingRow,
+  oe as SCROLL_CSS,
+  He as SHARED_CSS,
+  de as STATES_CSS,
+  $e as ScrollNav,
+  Ce as StatusChip,
+  Ee as createI18n,
+  he as createPanelTab,
+  ye as createScrollNav,
+  Me as formatDate,
+  Le as formatNumber,
+  fe as interpolate,
+  ve as intlTag,
+  h as panelText,
+  Ie as registerSidePanel,
+  Z as scrollStep,
+  me as supportedLocale
 };

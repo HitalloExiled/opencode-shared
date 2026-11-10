@@ -60,6 +60,7 @@ export function createScrollNav(options: ScrollNavOptions): ScrollController {
   let sentinel: HTMLDivElement | undefined;
   let observer: IntersectionObserver | undefined;
   let resize: ResizeObserver | undefined;
+  let detachScroll: (() => void) | undefined;
   let measureFrame = 0;
   let fillFrame = 0;
 
@@ -101,19 +102,18 @@ export function createScrollNav(options: ScrollNavOptions): ScrollController {
     });
   };
 
-  const behavior = (): ScrollBehavior =>
-    matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
+  const scrollTo = (top: number) => element?.scrollTo({ top, behavior: "smooth" });
 
   const focus = () => element?.focus({ preventScroll: true });
 
   const toTop = () => {
-    element?.scrollTo({ top: 0, behavior: behavior() });
+    scrollTo(0);
     focus();
   };
 
   const toBottom = () => {
     if (!element) return;
-    element.scrollTo({ top: element.scrollHeight, behavior: behavior() });
+    scrollTo(element.scrollHeight);
     if (canLoad()) options.loadMore();
     focus();
   };
@@ -130,20 +130,20 @@ export function createScrollNav(options: ScrollNavOptions): ScrollController {
     switch (event.key) {
       case "Home":
         event.preventDefault();
-        element.scrollTop = 0;
+        scrollTo(0);
         break;
       case "End":
         event.preventDefault();
-        element.scrollTop = element.scrollHeight;
+        scrollTo(element.scrollHeight);
         if (canLoad()) options.loadMore();
         break;
       case "PageUp":
         event.preventDefault();
-        element.scrollTop = Math.max(0, element.scrollTop - step);
+        scrollTo(Math.max(0, element.scrollTop - step));
         break;
       case "PageDown":
         event.preventDefault();
-        element.scrollTop = Math.min(element.scrollHeight, element.scrollTop + step);
+        scrollTo(Math.min(element.scrollHeight, element.scrollTop + step));
         break;
       default:
         return;
@@ -151,7 +151,15 @@ export function createScrollNav(options: ScrollNavOptions): ScrollController {
   };
 
   const connect = () => {
+    detachScroll?.();
+    detachScroll = undefined;
     if (!element) return;
+    const node = element;
+    // The edge state drives the to-top/to-bottom buttons: it must follow
+    // every scroll, not only resizes and content changes.
+    const onScroll = () => scheduleMeasure();
+    node.addEventListener("scroll", onScroll, { passive: true });
+    detachScroll = () => node.removeEventListener("scroll", onScroll);
     resize?.disconnect();
     resize = new ResizeObserver(scheduleMeasure);
     resize.observe(element);
@@ -187,6 +195,7 @@ export function createScrollNav(options: ScrollNavOptions): ScrollController {
   });
 
   onCleanup(() => {
+    detachScroll?.();
     resize?.disconnect();
     observer?.disconnect();
     cancelAnimationFrame(measureFrame);
@@ -240,7 +249,7 @@ export function ScrollNav(props: ScrollNavProps) {
 }
 
 export const SCROLL_CSS = `
-.os-scroll { scrollbar-width: thin; scrollbar-color: var(--v2-border-border-strong) transparent; }
+.os-scroll { scrollbar-width: thin; scrollbar-color: var(--v2-border-border-strong) transparent; scroll-behavior: smooth; }
 .os-scroll::-webkit-scrollbar { width: 10px; }
 .os-scroll::-webkit-scrollbar-thumb { background: var(--v2-border-border-strong); border-radius: 8px; border: 3px solid transparent; background-clip: padding-box; }
 .os-scroll:focus-visible { outline: 2px solid var(--v2-border-border-focus); outline-offset: -2px; }
