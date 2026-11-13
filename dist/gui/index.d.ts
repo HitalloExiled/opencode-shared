@@ -9,5 +9,6 @@ export * from "./scroll";
 export * from "./states";
 export * from "./chip";
 export * from "./i18n";
+export * from "./multi-select";
 export * from "./panel";
 export { SHARED_CSS } from "./css";
