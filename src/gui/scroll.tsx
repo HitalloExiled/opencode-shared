@@ -48,6 +48,11 @@ export type ScrollController = {
   atBottom: Accessor<boolean>;
   /** Recomputes the edge state; call it after a layout that is not observed. */
   measure: () => void;
+  /**
+   * Jumps back to the top without moving focus or animating; use it when the
+   * content is replaced (a new query or filter).
+   */
+  reset: () => void;
   toTop: () => void;
   toBottom: () => void;
   onKeyDown: (event: KeyboardEvent) => void;
@@ -105,6 +110,16 @@ export function createScrollNav(options: ScrollNavOptions): ScrollController {
   const scrollTo = (top: number) => element?.scrollTo({ top, behavior: "smooth" });
 
   const focus = () => element?.focus({ preventScroll: true });
+
+  const reset = () => {
+    const node = element;
+    if (!node) return;
+    // `.os-scroll` sets `scroll-behavior: smooth`; a reset must not animate.
+    const behavior = node.style.scrollBehavior;
+    node.style.scrollBehavior = "auto";
+    node.scrollTop = 0;
+    node.style.scrollBehavior = behavior;
+  };
 
   const toTop = () => {
     scrollTo(0);
@@ -202,7 +217,7 @@ export function createScrollNav(options: ScrollNavOptions): ScrollController {
     cancelAnimationFrame(fillFrame);
   });
 
-  return { ref, sentinelRef, scrollable, atTop, atBottom, measure, toTop, toBottom, onKeyDown };
+  return { ref, sentinelRef, scrollable, atTop, atBottom, measure, reset, toTop, toBottom, onKeyDown };
 }
 
 export type ScrollNavProps = {

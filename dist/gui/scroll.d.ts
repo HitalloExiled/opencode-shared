@@ -37,6 +37,11 @@ export type ScrollController = {
     atBottom: Accessor<boolean>;
     /** Recomputes the edge state; call it after a layout that is not observed. */
     measure: () => void;
+    /**
+     * Jumps back to the top without moving focus or animating; use it when the
+     * content is replaced (a new query or filter).
+     */
+    reset: () => void;
     toTop: () => void;
     toBottom: () => void;
     onKeyDown: (event: KeyboardEvent) => void;
