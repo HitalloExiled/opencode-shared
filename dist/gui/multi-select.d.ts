@@ -28,5 +28,10 @@ export type MultiSelectProps = {
     t: (key: string, ...args: unknown[]) => string;
     /** Extra class on the root, for row layout in the consuming plugin. */
     class?: string;
+    /**
+     * Draws a divider before the first option that matches (when it is not the
+     * first visible item), e.g. to separate Global/Machine from project paths.
+     */
+    dividerBefore?: (opt: string) => boolean;
 };
 export declare function MultiSelect(props: MultiSelectProps): import("solid-js").JSX.Element;

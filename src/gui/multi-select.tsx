@@ -32,6 +32,11 @@ export type MultiSelectProps = {
   t: (key: string, ...args: unknown[]) => string
   /** Extra class on the root, for row layout in the consuming plugin. */
   class?: string
+  /**
+   * Draws a divider before the first option that matches (when it is not the
+   * first visible item), e.g. to separate Global/Machine from project paths.
+   */
+  dividerBefore?: (opt: string) => boolean
 }
 
 const CSS = `
@@ -167,6 +172,7 @@ const CSS = `
   accent-color: var(--v2-state-fg-success);
 }
 .oc-ms .oc-ms-option span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.oc-ms .oc-ms-divider { height: 1px; margin: 4px 2px; background: var(--v2-border-border-muted); }
 `
 
 const matches = (text: string, query: string): boolean =>
@@ -279,15 +285,18 @@ export function MultiSelect(props: MultiSelectProps) {
           <Show when={search().trim() !== "" && visibleOptions().length === 0}>
             <div class="oc-ms-empty">{props.t("filter.none")}</div>
           </Show>
-          {visibleOptions().map((opt) => (
-            <label class="oc-ms-option" title={props.optionTitle?.(opt)}>
-              <input
-                type="checkbox"
-                checked={props.value().includes(opt)}
-                onChange={(event) => toggle(opt, event.target.checked)}
-              />
-              <span>{show(opt)}</span>
-            </label>
+          {visibleOptions().map((opt, index) => (
+            <>
+              {index > 0 && props.dividerBefore?.(opt) ? <div class="oc-ms-divider" /> : null}
+              <label class="oc-ms-option" title={props.optionTitle?.(opt)}>
+                <input
+                  type="checkbox"
+                  checked={props.value().includes(opt)}
+                  onChange={(event) => toggle(opt, event.target.checked)}
+                />
+                <span>{show(opt)}</span>
+              </label>
+            </>
           ))}
         </div>
       </div>
