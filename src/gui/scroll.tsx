@@ -15,6 +15,7 @@ import { createEffect, createSignal, onCleanup, Show, type Accessor } from "soli
 import { usePlugin } from "@opencode/plugin/gui";
 import type { IconName } from "@opencode/plugin/gui";
 import { scrollStep } from "./scroll-math";
+import scrollCss from "./scroll.scss?inline";
 
 export { scrollStep } from "./scroll-math";
 
@@ -263,14 +264,4 @@ export function ScrollNav(props: ScrollNavProps) {
   );
 }
 
-export const SCROLL_CSS = `
-.os-scroll { scrollbar-width: thin; scrollbar-color: var(--v2-border-border-strong) transparent; scroll-behavior: smooth; }
-.os-scroll::-webkit-scrollbar { width: 10px; }
-.os-scroll::-webkit-scrollbar-thumb { background: var(--v2-border-border-strong); border-radius: 8px; border: 3px solid transparent; background-clip: padding-box; }
-.os-scroll:focus-visible { outline: 2px solid var(--v2-border-border-focus); outline-offset: -2px; }
-.os-scroll-btn { position: absolute; left: 50%; transform: translateX(-50%); z-index: 10; display: flex; }
-.os-scroll-btn.is-top { top: 8px; }
-.os-scroll-btn.is-bottom { bottom: 8px; }
-.os-scroll-btn [data-component="icon-button-v2"] { box-shadow: var(--v2-elevation-raised); }
-.os-scroll-sentinel { height: 1px; flex: 0 0 auto; }
-`;
+export const SCROLL_CSS = scrollCss;

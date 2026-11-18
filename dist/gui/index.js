@@ -1,14 +1,15 @@
-import { createComponent as u, insert as i, memo as L, template as b, effect as T, className as N, setAttribute as C, delegateEvents as X, addEventListener as J } from "solid-js/web";
-import { Show as x, createSignal as F, createEffect as K, onCleanup as Q, createMemo as P } from "solid-js";
+import { createComponent as u, insert as i, memo as L, template as b, effect as T, className as N, setAttribute as C, delegateEvents as J, addEventListener as Q } from "solid-js/web";
+import { Show as x, createSignal as F, createEffect as K, onCleanup as X, createMemo as P } from "solid-js";
 import { usePlugin as z, Panel as Y, Command as Z, MenuItem as ee } from "@opencode/plugin/gui";
 const te = 48, re = 48;
 function ne(e) {
   return Math.max(te, e - re);
 }
-var le = /* @__PURE__ */ b('<div class="os-scroll-btn is-top">'), oe = /* @__PURE__ */ b('<div class="os-scroll-btn is-bottom">');
-const ae = 24, ie = 200, se = "input, textarea, select, [contenteditable='true'], [contenteditable=''], [role='textbox']";
-function De(e) {
-  const t = e.edge ?? ae, n = e.margin ?? ie;
+const le = ".os-scroll{scrollbar-width:thin;scrollbar-color:var(--v2-border-border-strong) transparent;scroll-behavior:smooth}.os-scroll::-webkit-scrollbar{width:10px}.os-scroll::-webkit-scrollbar-thumb{background:var(--v2-border-border-strong);border-radius:8px;border:3px solid transparent;background-clip:padding-box}.os-scroll:focus-visible{outline:2px solid var(--v2-border-border-focus);outline-offset:-2px}.os-scroll-btn{position:absolute;left:50%;transform:translate(-50%);z-index:10;display:flex}.os-scroll-btn.is-top{top:8px}.os-scroll-btn.is-bottom{bottom:8px}.os-scroll-btn [data-component=icon-button-v2]{box-shadow:var(--v2-elevation-raised)}.os-scroll-sentinel{height:1px;flex:0 0 auto}";
+var oe = /* @__PURE__ */ b('<div class="os-scroll-btn is-top">'), ae = /* @__PURE__ */ b('<div class="os-scroll-btn is-bottom">');
+const ie = 24, se = 200, ce = "input, textarea, select, [contenteditable='true'], [contenteditable=''], [role='textbox']";
+function Ne(e) {
+  const t = e.edge ?? ie, n = e.margin ?? se;
   let r, c, a, v, g, h = 0, d = 0;
   const [f, y] = F(!1), [w, D] = F(!0), [B, I] = F(!1), O = () => {
     var o;
@@ -41,7 +42,7 @@ function De(e) {
     s(0), m();
   }, $ = () => {
     r && (s(r.scrollHeight), S() && e.loadMore(), m());
-  }, R = (o) => o instanceof HTMLElement && o.closest(se) !== null, A = (o) => {
+  }, R = (o) => o instanceof HTMLElement && o.closest(ce) !== null, A = (o) => {
     if (o.defaultPrevented || o.altKey || o.ctrlKey || o.metaKey || R(o.target) || !r || r.scrollHeight <= r.clientHeight) return;
     const p = ne(r.clientHeight);
     switch (o.key) {
@@ -79,7 +80,7 @@ function De(e) {
   return K(() => {
     var o, p;
     e.hasMore(), e.loadingMore(), (o = e.visible) == null || o.call(e), (p = e.items) == null || p.call(e), E(), l();
-  }), Q(() => {
+  }), X(() => {
     g == null || g(), v == null || v.disconnect(), a == null || a.disconnect(), cancelAnimationFrame(h), cancelAnimationFrame(d);
   }), {
     ref: q,
@@ -94,14 +95,14 @@ function De(e) {
     onKeyDown: A
   };
 }
-function Re(e) {
+function Oe(e) {
   const t = z();
   return [u(x, {
     get when() {
       return L(() => !!e.nav.scrollable())() && !e.nav.atTop();
     },
     get children() {
-      var n = le();
+      var n = oe();
       return i(n, u(t.ui.Tooltip, {
         get value() {
           return e.topLabel;
@@ -129,7 +130,7 @@ function Re(e) {
       return L(() => !!e.nav.scrollable())() && !e.nav.atBottom();
     },
     get children() {
-      var n = oe();
+      var n = ae();
       return i(n, u(t.ui.Tooltip, {
         get value() {
           return e.bottomLabel;
@@ -154,22 +155,12 @@ function Re(e) {
     }
   })];
 }
-const ce = `
-.os-scroll { scrollbar-width: thin; scrollbar-color: var(--v2-border-border-strong) transparent; scroll-behavior: smooth; }
-.os-scroll::-webkit-scrollbar { width: 10px; }
-.os-scroll::-webkit-scrollbar-thumb { background: var(--v2-border-border-strong); border-radius: 8px; border: 3px solid transparent; background-clip: padding-box; }
-.os-scroll:focus-visible { outline: 2px solid var(--v2-border-border-focus); outline-offset: -2px; }
-.os-scroll-btn { position: absolute; left: 50%; transform: translateX(-50%); z-index: 10; display: flex; }
-.os-scroll-btn.is-top { top: 8px; }
-.os-scroll-btn.is-bottom { bottom: 8px; }
-.os-scroll-btn [data-component="icon-button-v2"] { box-shadow: var(--v2-elevation-raised); }
-.os-scroll-sentinel { height: 1px; flex: 0 0 auto; }
-`;
-var de = /* @__PURE__ */ b("<div class=os-empty><div class=os-empty-title>"), ue = /* @__PURE__ */ b("<div class=os-empty-hint>"), ve = /* @__PURE__ */ b("<div class=os-error role=alert><span class=os-error-text>"), me = /* @__PURE__ */ b("<div><span>"), be = /* @__PURE__ */ b("<div class=os-end>");
-function Ae(e) {
+const de = le, ue = ".os-empty{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;padding:24px 10px;color:var(--v2-text-text-muted)}.os-empty-icon{color:var(--v2-text-text-faint)}.os-empty-title{font-weight:600;color:var(--v2-text-text-base)}.os-empty-hint{font-size:11.5px;line-height:1.45}.os-error{display:flex;flex-direction:column;align-items:flex-start;gap:6px;padding:8px 10px;border-radius:6px;color:var(--v2-state-fg-danger);background:var(--v2-state-bg-danger);border:1px solid var(--v2-state-border-danger);white-space:pre-wrap}.os-error-text{font-size:12px;line-height:1.45;overflow-wrap:anywhere}.os-loading{display:flex;align-items:center;gap:8px;padding:8px 2px;color:var(--v2-text-text-muted)}.os-end{color:var(--v2-text-text-faint);font-size:10px;text-align:center;padding:4px 0 8px}";
+var ve = /* @__PURE__ */ b("<div class=os-empty><div class=os-empty-title>"), me = /* @__PURE__ */ b("<div class=os-empty-hint>"), be = /* @__PURE__ */ b("<div class=os-error role=alert><span class=os-error-text>"), ge = /* @__PURE__ */ b("<div><span>"), fe = /* @__PURE__ */ b("<div class=os-end>");
+function je(e) {
   const t = z();
   return (() => {
-    var n = de(), r = n.firstChild;
+    var n = ve(), r = n.firstChild;
     return i(n, u(x, {
       get when() {
         return e.icon;
@@ -186,16 +177,16 @@ function Ae(e) {
         return e.hint;
       },
       children: (c) => (() => {
-        var a = ue();
+        var a = me();
         return i(a, c), a;
       })()
     }), null), n;
   })();
 }
-function Fe(e) {
+function Ke(e) {
   const t = z();
   return (() => {
-    var n = ve(), r = n.firstChild;
+    var n = be(), r = n.firstChild;
     return i(r, () => e.message), i(n, u(x, {
       get when() {
         return L(() => !!e.retryLabel)() && e.onRetry;
@@ -216,39 +207,30 @@ function Fe(e) {
     }), null), n;
   })();
 }
-function Ne(e) {
+function Ve(e) {
   const t = z();
   return (() => {
-    var n = me(), r = n.firstChild;
+    var n = ge(), r = n.firstChild;
     return i(n, u(t.ui.Loader, {
       size: "small"
     }), r), i(r, () => e.label), T(() => N(n, e.class ? `os-loading ${e.class}` : "os-loading")), n;
   })();
 }
-function Oe(e) {
+function qe(e) {
   return (() => {
-    var t = be();
+    var t = fe();
     return i(t, () => e.label), t;
   })();
 }
-const ge = `
-.os-empty { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px; padding: 24px 10px; color: var(--v2-text-text-muted); }
-.os-empty-icon { color: var(--v2-text-text-faint); }
-.os-empty-title { font-weight: 600; color: var(--v2-text-text-base); }
-.os-empty-hint { font-size: 11.5px; line-height: 1.45; }
-.os-error { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; padding: 8px 10px; border-radius: 6px; color: var(--v2-state-fg-danger); background: var(--v2-state-bg-danger); border: 1px solid var(--v2-state-border-danger); white-space: pre-wrap; }
-.os-error-text { font-size: 12px; line-height: 1.45; overflow-wrap: anywhere; }
-.os-loading { display: flex; align-items: center; gap: 8px; padding: 8px 2px; color: var(--v2-text-text-muted); }
-.os-end { color: var(--v2-text-text-faint); font-size: 10px; text-align: center; padding: 4px 0 8px; }
-`;
-var fe = /* @__PURE__ */ b("<span>");
-function je(e) {
+const xe = ue, he = ".os-chip{display:inline-flex;align-items:center;gap:4px;padding:1px 6px;border-radius:999px;font-size:10.5px;font-weight:600;line-height:1.6;white-space:nowrap;background:var(--v2-overlay-simple-overlay-pressed);color:var(--v2-text-text-muted);border:1px solid transparent}.os-chip.is-info{background:var(--v2-state-bg-info);color:var(--v2-state-fg-info);border-color:var(--v2-state-border-info)}.os-chip.is-success{background:var(--v2-state-bg-success);color:var(--v2-state-fg-success);border-color:var(--v2-state-border-success)}.os-chip.is-warning{background:var(--v2-state-bg-warning);color:var(--v2-state-fg-warning);border-color:var(--v2-state-border-warning)}.os-chip.is-danger{background:var(--v2-state-bg-danger);color:var(--v2-state-fg-danger);border-color:var(--v2-state-border-danger)}";
+var pe = /* @__PURE__ */ b("<span>");
+function Ue(e) {
   const t = () => {
     const n = e.tone ?? "neutral";
     return `os-chip${n === "neutral" ? "" : ` is-${n}`}${e.class ? ` ${e.class}` : ""}`;
   };
   return (() => {
-    var n = fe();
+    var n = pe();
     return i(n, () => e.label), T((r) => {
       var c = t(), a = e.title;
       return c !== r.e && N(n, r.e = c), a !== r.t && C(n, "title", r.t = a), r;
@@ -258,45 +240,39 @@ function je(e) {
     }), n;
   })();
 }
-const xe = `
-.os-chip { display: inline-flex; align-items: center; gap: 4px; padding: 1px 6px; border-radius: 999px; font-size: 10.5px; font-weight: 600; line-height: 1.6; white-space: nowrap; background: var(--v2-overlay-simple-overlay-pressed); color: var(--v2-text-text-muted); border: 1px solid transparent; }
-.os-chip.is-info { background: var(--v2-state-bg-info); color: var(--v2-state-fg-info); border-color: var(--v2-state-border-info); }
-.os-chip.is-success { background: var(--v2-state-bg-success); color: var(--v2-state-fg-success); border-color: var(--v2-state-border-success); }
-.os-chip.is-warning { background: var(--v2-state-bg-warning); color: var(--v2-state-fg-warning); border-color: var(--v2-state-border-warning); }
-.os-chip.is-danger { background: var(--v2-state-bg-danger); color: var(--v2-state-fg-danger); border-color: var(--v2-state-border-danger); }
-`;
-function he(e) {
+const we = he;
+function ye(e) {
   return (e ?? "").trim().toLowerCase().replace(/[-_]/g, "").startsWith("pt") ? "pt-br" : "en-us";
 }
-function pe(e) {
+function $e(e) {
   return e === "pt-br" ? "pt-BR" : "en-US";
 }
-function we(e, t) {
+function ke(e, t) {
   return e.replace(/\{(\d+)\}/g, (n, r) => String(t[Number(r)] ?? ""));
 }
-function Ke(e, t) {
+function We(e, t) {
   const n = { "en-us": e, "pt-br": t }, r = () => {
     const v = z();
-    return P(() => he(v.locale.locale()));
+    return P(() => ye(v.locale.locale()));
   };
   return { useLocale: r, useI18nTag: () => {
     const v = r();
-    return P(() => pe(v()));
+    return P(() => $e(v()));
   }, useT: () => {
     const v = r();
     return (g, ...h) => {
       const f = n[v()][g] ?? (typeof h[0] == "string" ? h[0] : g);
-      return we(f, h);
+      return ke(f, h);
     };
   }, tables: n };
 }
-function Ve(e, t, n) {
+function Ge(e, t, n) {
   return new Intl.NumberFormat(t, n).format(e);
 }
-function qe(e, t, n) {
+function Je(e, t, n) {
   return new Intl.DateTimeFormat(t, n).format(e);
 }
-var ye = /* @__PURE__ */ b('<span class="oc-ms-btn-label is-placeholder">'), $e = /* @__PURE__ */ b("<span class=oc-ms-tags>"), ke = /* @__PURE__ */ b("<span class=oc-ms-caret aria-hidden=true>"), _e = /* @__PURE__ */ b("<span class=oc-ms-x role=button tabindex=0><span class=oc-ms-clear aria-hidden=true>×"), Ce = /* @__PURE__ */ b("<div class=oc-ms-empty>"), Se = /* @__PURE__ */ b(`<div><style>
+var _e = /* @__PURE__ */ b('<span class="oc-ms-btn-label is-placeholder">'), Ce = /* @__PURE__ */ b("<span class=oc-ms-tags>"), Se = /* @__PURE__ */ b("<span class=oc-ms-caret aria-hidden=true>"), Te = /* @__PURE__ */ b("<span class=oc-ms-x role=button tabindex=0><span class=oc-ms-clear aria-hidden=true>×"), Le = /* @__PURE__ */ b("<div class=oc-ms-empty>"), Ee = /* @__PURE__ */ b(`<div><style>
 .oc-ms { position: relative; }
 .oc-ms .oc-ms-row { display: flex; gap: 4px; align-items: stretch; }
 .oc-ms .oc-ms-btn {
@@ -430,9 +406,9 @@ var ye = /* @__PURE__ */ b('<span class="oc-ms-btn-label is-placeholder">'), $e 
 }
 .oc-ms .oc-ms-option span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .oc-ms .oc-ms-divider { height: 1px; margin: 4px 2px; background: var(--v2-border-border-muted); }
-</style><div class=oc-ms-row><button class=oc-ms-btn type=button><div class=oc-ms-btn-content></div></button></div><div><div class=oc-ms-head><span></span></div><div class=oc-ms-search><input type=text class=oc-ms-search-input></div><div class=oc-ms-list>`), Te = /* @__PURE__ */ b("<span class=oc-ms-tag>"), Le = /* @__PURE__ */ b('<span class="oc-ms-tag oc-ms-tag-more">+'), Ee = /* @__PURE__ */ b("<label class=oc-ms-option><input type=checkbox><span>"), Me = /* @__PURE__ */ b("<div class=oc-ms-divider>");
+</style><div class=oc-ms-row><button class=oc-ms-btn type=button><div class=oc-ms-btn-content></div></button></div><div><div class=oc-ms-head><span></span></div><div class=oc-ms-search><input type=text class=oc-ms-search-input></div><div class=oc-ms-list>`), Me = /* @__PURE__ */ b("<span class=oc-ms-tag>"), ze = /* @__PURE__ */ b('<span class="oc-ms-tag oc-ms-tag-more">+'), Be = /* @__PURE__ */ b("<label class=oc-ms-option><input type=checkbox><span>"), Ie = /* @__PURE__ */ b("<div class=oc-ms-divider>");
 const j = (e, t) => e.toLowerCase().includes(t.toLowerCase());
-function Ue(e) {
+function Qe(e) {
   const t = z(), n = (d) => {
     var f;
     return ((f = e.display) == null ? void 0 : f.call(e, d)) ?? d;
@@ -448,13 +424,13 @@ function Ue(e) {
     return d ? e.options.filter((f) => j(f, d) || j(n(f), d)) : e.options;
   });
   return (() => {
-    var d = Se(), f = d.firstChild, y = f.nextSibling, w = y.firstChild, D = w.firstChild, B = y.nextSibling, I = B.firstChild, O = I.firstChild, S = I.nextSibling, k = S.firstChild, E = S.nextSibling;
-    return J(w, "click", e.onOpenChange, !0), i(D, u(x, {
+    var d = Ee(), f = d.firstChild, y = f.nextSibling, w = y.firstChild, D = w.firstChild, B = y.nextSibling, I = B.firstChild, O = I.firstChild, S = I.nextSibling, k = S.firstChild, E = S.nextSibling;
+    return Q(w, "click", e.onOpenChange, !0), i(D, u(x, {
       get when() {
         return e.value().length === 0;
       },
       get children() {
-        var l = ye();
+        var l = _e();
         return i(l, () => e.placeholder), l;
       }
     }), null), i(D, u(x, {
@@ -462,14 +438,14 @@ function Ue(e) {
         return e.value().length > 0;
       },
       get children() {
-        var l = $e();
+        var l = Ce();
         return i(l, () => e.value().slice(0, 2).map((s) => (() => {
-          var m = Te();
+          var m = Me();
           return i(m, () => n(s)), m;
         })()), null), i(l, (() => {
           var s = L(() => e.value().length > 2);
           return () => s() && (() => {
-            var m = Le();
+            var m = ze();
             return m.firstChild, i(m, () => e.value().length - 2, null), m;
           })();
         })(), null), l;
@@ -479,14 +455,14 @@ function Ue(e) {
         return e.value().length === 0;
       },
       get children() {
-        return ke();
+        return Se();
       }
     }), null), i(w, u(x, {
       get when() {
         return e.value().length > 0;
       },
       get children() {
-        var l = _e();
+        var l = Te();
         return l.$$keydown = (s) => {
           (s.key === "Enter" || s.key === " ") && (s.preventDefault(), s.stopPropagation(), a());
         }, l.$$click = (s) => {
@@ -512,14 +488,14 @@ function Ue(e) {
         return L(() => v().trim() !== "")() && h().length === 0;
       },
       get children() {
-        var l = Ce();
+        var l = Le();
         return i(l, () => e.t("filter.none")), l;
       }
     }), null), i(E, () => h().map((l, s) => [L(() => L(() => {
       var m;
       return !!(s > 0 && ((m = e.dividerBefore) != null && m.call(e, l)));
-    })() ? Me() : null), (() => {
-      var m = Ee(), _ = m.firstChild, M = _.nextSibling;
+    })() ? Ie() : null), (() => {
+      var m = Be(), _ = m.firstChild, M = _.nextSibling;
       return _.addEventListener("change", ($) => c(l, $.target.checked)), i(M, () => n(l)), T(() => {
         var $;
         return C(m, "title", ($ = e.optionTitle) == null ? void 0 : $.call(e, l));
@@ -538,11 +514,11 @@ function Ue(e) {
     }), T(() => k.value = v()), d;
   })();
 }
-X(["click", "keydown", "input"]);
+J(["click", "keydown", "input"]);
 function H(e, t) {
   return (e.locale.locale() ?? "").toLowerCase().startsWith("pt") ? t.pt : t.en;
 }
-function ze(e, t) {
+function He(e, t) {
   return P(() => ({
     id: t.id,
     title: H(e, t.title),
@@ -550,8 +526,8 @@ function ze(e, t) {
     fallback: t.fallback ?? !1
   }));
 }
-function We(e, t) {
-  const n = ze(e, {
+function Xe(e, t) {
+  const n = He(e, {
     id: t.id,
     title: t.title,
     closable: t.closable,
@@ -609,30 +585,28 @@ function We(e, t) {
     open: r
   };
 }
-const Be = `
-.os-list { display: flex; flex-direction: column; gap: 10px; }
-`, Ge = `${ce}${Be}${ge}${xe}`;
+const Pe = ".os-list{display:flex;flex-direction:column;gap:10px}", De = Pe, Ye = `${de}${De}${xe}${we}`;
 export {
-  xe as CHIP_CSS,
-  Ae as EmptyState,
-  Oe as EndMarker,
-  Fe as ErrorBanner,
-  Ne as LoadingRow,
-  Ue as MultiSelect,
-  ce as SCROLL_CSS,
-  Ge as SHARED_CSS,
-  ge as STATES_CSS,
-  Re as ScrollNav,
-  je as StatusChip,
-  Ke as createI18n,
-  ze as createPanelTab,
-  De as createScrollNav,
-  qe as formatDate,
-  Ve as formatNumber,
-  we as interpolate,
-  pe as intlTag,
+  we as CHIP_CSS,
+  je as EmptyState,
+  qe as EndMarker,
+  Ke as ErrorBanner,
+  Ve as LoadingRow,
+  Qe as MultiSelect,
+  de as SCROLL_CSS,
+  Ye as SHARED_CSS,
+  xe as STATES_CSS,
+  Oe as ScrollNav,
+  Ue as StatusChip,
+  We as createI18n,
+  He as createPanelTab,
+  Ne as createScrollNav,
+  Je as formatDate,
+  Ge as formatNumber,
+  ke as interpolate,
+  $e as intlTag,
   H as panelText,
-  We as registerSidePanel,
+  Xe as registerSidePanel,
   ne as scrollStep,
-  he as supportedLocale
+  ye as supportedLocale
 };

@@ -18,8 +18,10 @@ Package: `opencode-shared`, entry `opencode-shared/gui`.
 
 ## Rules
 
-- Styles are exported as strings (`SHARED_CSS`); components never import `.css`
-  files, because the app loads a single CJS bundle. Classes use the `os-` prefix.
+- Styles are authored as `.scss` files, imported with the Vite `?inline`
+  suffix and still exported as strings (`SHARED_CSS`): the app loads a single
+  CJS bundle per plugin, and `?inline` is resolved inside this repo's own
+  build, so the published `dist/` stays pure JS. Classes use the `os-` prefix.
 - `solid-js`, `solid-js/web` and `@opencode/plugin` are peer dependencies and
   externals: the consuming plugin shares the app's instances.
 - Colors and metrics come from the app tokens (`--v2-*`). No hardcoded palette.

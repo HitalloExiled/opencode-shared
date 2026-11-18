@@ -7,6 +7,7 @@
 import { Show } from "solid-js";
 import { usePlugin } from "@opencode/plugin/gui";
 import type { IconName } from "@opencode/plugin/gui";
+import statesCss from "./states.scss?inline";
 
 export type EmptyStateProps = {
   title: string;
@@ -66,13 +67,4 @@ export function EndMarker(props: { label: string }) {
   return <div class="os-end">{props.label}</div>;
 }
 
-export const STATES_CSS = `
-.os-empty { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px; padding: 24px 10px; color: var(--v2-text-text-muted); }
-.os-empty-icon { color: var(--v2-text-text-faint); }
-.os-empty-title { font-weight: 600; color: var(--v2-text-text-base); }
-.os-empty-hint { font-size: 11.5px; line-height: 1.45; }
-.os-error { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; padding: 8px 10px; border-radius: 6px; color: var(--v2-state-fg-danger); background: var(--v2-state-bg-danger); border: 1px solid var(--v2-state-border-danger); white-space: pre-wrap; }
-.os-error-text { font-size: 12px; line-height: 1.45; overflow-wrap: anywhere; }
-.os-loading { display: flex; align-items: center; gap: 8px; padding: 8px 2px; color: var(--v2-text-text-muted); }
-.os-end { color: var(--v2-text-text-faint); font-size: 10px; text-align: center; padding: 4px 0 8px; }
-`;
+export const STATES_CSS = statesCss;

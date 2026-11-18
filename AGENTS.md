@@ -7,8 +7,14 @@ surface.
 
 - **Only UI code that at least two plugins use.** Data access, copy tables,
   domain formatting and chart/gauge SVGs stay in the plugin.
-- **No `.css` imports.** Export CSS strings (`SHARED_CSS`) so the plugin bundle
-  stays a single CJS file. Prefix every class with `os-`.
+- **Styles live in `.scss` files, imported with the Vite `?inline` suffix**
+  (`import chipCss from "./chip.scss?inline"`), still exported as strings
+  (`SHARED_CSS`) so the plugin bundle stays a single CJS file. `?inline` is
+  resolved at build time inside this repo's own Vite build (`vite build` →
+  `dist/gui/index.js`, lib mode, one entry): the published `dist/` stays pure
+  JS, no `.scss` or separate CSS chunk ever reaches a consuming plugin. Prefix
+  every class with `os-`. (Migrated 2026-11-18 from CSS-as-template-string;
+  see `opencode-tools`' CSS-migration plan.)
 - **Only tokens that exist** in `packages/ui/src/styles/tokens/theme.css` of the
   OpenCode app. Status colors use `--v2-state-{fg,bg,border}-*`.
 - **Keep `solid-js` and `@opencode/plugin` external** in the build; they are

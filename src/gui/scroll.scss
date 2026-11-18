@@ -1,0 +1,46 @@
+.os-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--v2-border-border-strong) transparent;
+  scroll-behavior: smooth;
+
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--v2-border-border-strong);
+    border-radius: 8px;
+    border: 3px solid transparent;
+    background-clip: padding-box;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--v2-border-border-focus);
+    outline-offset: -2px;
+  }
+}
+
+.os-scroll-btn {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+
+  &.is-top {
+    top: 8px;
+  }
+
+  &.is-bottom {
+    bottom: 8px;
+  }
+
+  [data-component="icon-button-v2"] {
+    box-shadow: var(--v2-elevation-raised);
+  }
+}
+
+.os-scroll-sentinel {
+  height: 1px;
+  flex: 0 0 auto;
+}
